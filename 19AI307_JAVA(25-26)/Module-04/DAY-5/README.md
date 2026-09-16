@@ -1,105 +1,132 @@
-# Ex.No:4(D) DESIGN PATTERN -- ABSTRACT FACTORY
+# Ex.No:4(E) DESIGN PATTERN  ---- BEHAVIOUR PATTERN
 
 ## QUESTION:
-You are asked to simulate a simple Shape Drawing Tool using the Factory Design Pattern in Java.
-
-You will implement a Shape interface with concrete classes for different shapes (Circle, Square, Rectangle). Using a ShapeFactory, your program will take shape names from user input and draw them accordingly. If the shape is unknown, print an error message.
-
-
+Create an Article class where changes to the content are saved as mementos. Let the user view and restore any saved version.
 
 ## AIM:
-To write a Java program that implements the Factory Design Pattern to create and draw shapes dynamically based on user input.
+To implement the Memento Design Pattern that allows saving and restoring versions of an Article object.
 
 ## ALGORITHM :
-1.	Start the program.
-2.	Import the necessary package 'java.util'
-3.	Create a Shape interface containing a draw() method.
-4. Create concrete classes Circle, Square, and Rectangle implementing Shape.
-5. Create a ShapeFactory class with a method getShape(String shapeType).
-6. In the main() method, accept user input for shape type.
-7. Call factory method to get the appropriate object.
-8. Draw the shape or print error if unknown.
-9. Stop the program.
-
+1.	Create ArticleMemento to store article content (state).
+2.	Create Article (Originator) that can write, save, and restore content.
+3.	Create VersionHistory (Caretaker) to store multiple mementos.
+4.	Allow the user to:
+5.	Write new content
+6.	Save current version
+7.	View all saved versions
+8.	Restore any version
+9.	Display restored version content.
 
 ## PROGRAM:
  ```
 /*
-Program to implement a Abstract Factory Pattern using Java
+Program to implement a InnerClass using Java
 Developed by: R.TEJASWINI
-Register Number: 212224230218
+RegisterNumber: 212224230218
 */
 ```
 
 ## SOURCE CODE:
 ```
-import java.util.Scanner;
 
-interface Shape {
-    void draw();
-}
+import java.util.*;
 
-class Circle implements Shape {
-    public void draw() {
-        System.out.println("Drawing Circle");
+class Article {
+    private String content;
+
+    public Article(String content) {
+        this.content = content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    // Save current state to memento
+    public ArticleMemento save() {
+        return new ArticleMemento(content);
+    }
+
+    // Restore state from memento
+    public void restore(ArticleMemento memento) {
+        this.content = memento.getContent();
     }
 }
 
-class Square implements Shape {
-    public void draw() {
-        System.out.println("Drawing Square");
+class ArticleMemento {
+    private final String content;
+
+    public ArticleMemento(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
     }
 }
 
-class Rectangle implements Shape {
-    public void draw() {
-        System.out.println("Drawing Rectangle");
-    }
-}
+class ArticleHistory {
+    private List<ArticleMemento> versions = new ArrayList<>();
 
-class ShapeFactory {
-    public Shape getShape(String shapeType) {
-        if (shapeType == null) {
-            return null;
+    public void saveVersion(Article article) {
+        versions.add(article.save());
+    }
+
+    public ArticleMemento getVersion(int index) {
+        if (index >= 0 && index < versions.size()) {
+            return versions.get(index);
         }
-        switch (shapeType.toLowerCase()) {
-            case "circle":
-                return new Circle();
-            case "square":
-                return new Square();
-            case "rectangle":
-                return new Rectangle();
-            default:
-                return null;
-        }
+        return null;
+    }
+
+    public List<ArticleMemento> getAllVersions() {
+        return versions;
     }
 }
 
-public class Main {
+public class ArticleManager {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ShapeFactory factory = new ShapeFactory();
-        
-        while (true) {
-            String input = sc.nextLine().trim();
-            if (input.equalsIgnoreCase("exit")) {
-                break;
-            }
-            
-            Shape shape = factory.getShape(input);
-            if (shape != null) {
-                shape.draw();
-            } else {
-                System.out.println("Invalid shape: " + input);
-            }
+
+        // Read number of versions
+        int n = Integer.parseInt(sc.nextLine());
+        ArticleHistory history = new ArticleHistory();
+        Article article = new Article("");
+
+        // Read and save each version
+        for (int i = 0; i < n; i++) {
+            String content = sc.nextLine();
+            article.setContent(content);
+            history.saveVersion(article);
         }
+
+        // Read version index to restore (0-based)
+        int restoreIndex = Integer.parseInt(sc.nextLine());
+        ArticleMemento memento = history.getVersion(restoreIndex);
+        if (memento != null) {
+            article.restore(memento);
+            System.out.println(article.getContent());
+        } else {
+            System.out.println("Invalid version");
+        }
+
         sc.close();
     }
 }
-```
-## OUTPUT:
 
-![java44](https://github.com/ABINAYA-27-76/19AI307_ODD-25-26-/blob/b628a27d8352a971924fad5b0adffc7f5f8644ba/19AI307_JAVA(25-26)/Module-04/DAY-4/java44.png)
+```
+
+## OUTPUT:
+<img width="1240" height="593" alt="image" src="https://github.com/user-attachments/assets/1011ef9f-2030-4cf0-af05-89f76ddb4b89" />
+
+
 
 ## RESULT:
-Thus, the Java program to simulate Shape Drawing using the Factory Design Pattern was successfully implemented and executed.
+The program successfully demonstrates the Memento Pattern, allowing the user to save, view, and restore different versions of an article.
+
+
+
