@@ -153,3 +153,181 @@ Thus, the Java program to implement conditional statements for the haunted house
 
 ---------
 
+# Ex.No:1(C) LOOPING STATEMENT
+
+## QUESTION:
+Construct a right-angled triangle star pattern using for loop.
+## AIM:
+To write a Java program using looping statements to print a right-angled triangle star pattern based on user input.
+
+## ALGORITHM :
+1.	Start the program.
+
+2.	Import the necessary package 'java.util'
+
+3. Read the number of rows from the user.
+
+4. Use an outer loop to iterate through each row.
+
+5. Use an inner loop to print stars (*) for each row.
+
+6. Move to the next line after printing stars for each row.
+
+7. End the program.
+
+
+## PROGRAM:
+ ```
+/*
+Program to implement a Looping Statement using Java
+Developed by: R.TEJASWINI
+Register Number: 212224230218
+*/
+```
+
+## SOURCE CODE:
+
+```
+import java.util.*;
+public class TrianglePattern
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for (int i = 1; i <= n; i++) 
+        {         
+            for (int j = 1; j <= i; j++) 
+            {      
+                System.out.print("* ");
+            }
+            System.out.println();              
+        }
+    }
+}
+
+```
+
+## OUTPUT:
+<img width="399" height="395" alt="image" src="https://github.com/user-attachments/assets/07286d0c-5174-4702-8d58-34b630bd23d6" />
+
+## RESULT:
+Thus, the Java program using looping statements to print a right-angled triangle star pattern was successfully written, executed, and verified.
+-------
+# Ex.No:1(D) ARRAYS
+
+## QUESTION:
+Write a Java program to find the index of a given element in an array
+
+## AIM:
+To write a Java program that reads an array of integers and finds the index of a given element within the array.
+
+## ALGORITHM :
+1.Start the program and read the size of the array n.
+
+2.Read n integer elements and store them in the array a[ ].
+
+3.Read the element x whose index needs to be found.
+
+4.Traverse the array from index 0 to n-1:
+
+     If a[i] == x, print the index i and terminate the program.
+
+5.If the loop finishes without a match, print "Element not found".
+
+6.End the program.	
+
+## PROGRAM:
+ ```
+/*
+Program to implement a Array concept using Java
+Developed by: R.TEJASWINI
+Register Number: 212224230218
+*/
+```
+
+## SOURCE CODE:
+```
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int a[] = new int[n];
+        for (int i = 0; i < n; i++) 
+        {
+        a[i] = sc.nextInt();
+        }
+        
+        int x = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            if (a[i] == x) {
+                System.out.println(i);
+                return;
+            }
+            
+        }
+        System.out.println("Element not found");
+        
+    }
+}
+
+```
+
+## OUTPUT:
+<img width="738" height="484" alt="image" src="https://github.com/user-attachments/assets/876daa06-86a6-4563-bfa0-4b87142e825b" />
+
+## RESULT:
+Therefore the program successfully searches the array for the given element.
+------
+# Ex.No:1(E) STRINGS AND MATH FUNCTION
+
+## QUESTION:
+Write a Java program to find the absolute value of a number using Math.abs().
+
+## AIM:
+To write a Java program that finds the absolute value of a given number using the Math.abs() method.
+
+## ALGORITHM :
+1.Start the program and create a Scanner object.
+
+2.Read a number n (can be integer or decimal) from the user.
+
+3.Use the built-in function Math.abs(n) to compute its absolute value.
+
+4.Display the calculated absolute value.
+
+5.End the program.
+
+## PROGRAM:
+ ```
+/*
+Program to implement a Strings and Math Function using Java
+Developed by: R.TEJASWINI
+Register Number: 212224230218
+*/
+```
+
+## SOURCE CODE:
+```
+import java.util.*;
+public class demo
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        double n=sc.nextDouble();
+        System.out.println("Absolute value = "+Math.abs(n));
+    }
+}
+
+```
+
+## OUTPUT:
+<img width="673" height="241" alt="image" src="https://github.com/user-attachments/assets/3da43a7d-d3dd-4ed9-a99a-5f1b2e15c015" />
+
+
+
+## RESULT:
+Therefore the program successfully reads a number and calculates its absolute value.
