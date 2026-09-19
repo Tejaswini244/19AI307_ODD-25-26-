@@ -65,3 +65,318 @@ public class FileWriterExampleUserInput {
 
 ## RESULT:
 Thus, the Java program to write characters to a file using FileWriter was successfully executed and verified.
+-----
+# Ex.No:5(B) SERIALIZATION AND DESERIALIZATION 
+
+## QUESTION:
+Write a Java program to read a string from the user, compress it in memory using ByteArrayOutputStream + GZIPOutputStream, and then decompress it back using ByteArrayInputStream + GZIPInputStream.
+
+
+## AIM:
+
+To write a Java program that reads a string from the user, compresses it using GZIP compression, and then decompresses it back to its original form.
+
+## ALGORITHM :
+1.	Start the program.
+2.	Import the necessary package 'java.util'
+3.	Read a string from the user using Scanner.
+4. Create a ByteArrayOutputStream object to hold compressed data.
+5. Wrap it with GZIPOutputStream and write the user string into it to perform compression.
+6. Convert compressed data into a byte array.
+7. Create a ByteArrayInputStream object using the compressed byte array.
+8. Wrap it with GZIPInputStream to decompress the content.
+9. Read decompressed bytes and convert them back into the original string.
+10. Display original, compressed size, and decompressed results.
+11. End the program.
+
+
+
+
+
+## PROGRAM:
+ ```
+/*
+Program to implement a Serialization and Deserialization using Java
+Developed by: R.TEJASWINI
+RegisterNumber: 212224230218
+*/
+```
+
+## SOURCE CODE:
+```
+import java.io.*;
+import java.util.Scanner;
+import java.util.zip.GZIPOutputStream;
+import java.util.zip.GZIPInputStream;
+
+public class GZIPMemoryExample {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            String input = scanner.nextLine();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            GZIPOutputStream gzipOut = new GZIPOutputStream(baos);
+            gzipOut.write(input.getBytes("UTF-8"));
+            gzipOut.close(); 
+
+            byte[] compressedData = baos.toByteArray();
+            System.out.println("Compressed data (bytes):");
+            for (byte b : compressedData) {
+                System.out.print(b + " ");
+            }
+            System.out.println("\nTotal bytes: " + compressedData.length);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(compressedData);
+            GZIPInputStream gzipIn = new GZIPInputStream(bais);
+            InputStreamReader reader = new InputStreamReader(gzipIn, "UTF-8");
+            BufferedReader br = new BufferedReader(reader);
+
+            StringBuilder decompressed = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                decompressed.append(line);
+            }
+
+            System.out.println("\nDecompressed string:");
+            System.out.println(decompressed.toString());
+
+            br.close();
+            gzipIn.close();
+            bais.close();
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
+```
+
+## OUTPUT:
+![java52](https://github.com/ABINAYA-27-76/19AI307_ODD-25-26-/blob/4629176025934c52170b68fd2b511f5724754685/19AI307_JAVA(25-26)/Module-05/DAY-2/java52.png)
+
+
+## RESULT:
+Thus, the Java program to compress and decompress a string using ByteArrayOutputStream, GZIPOutputStream, ByteArrayInputStream, and GZIPInputStream was successfully implemented and executed.
+-----
+# Ex.No:5(C)  FILE HANDLING USING JAVA
+## QUESTION:
+Write a program to count the number of characters in a file.
+
+## AIM:
+To count and display the total number of characters in a file using FileReader.
+
+## ALGORITHM :
+1.	Ask the user for the file name.
+2.	Open the file using FileReader.
+3.	Read each character one by one until the end of the file.
+4.	Increment a counter for each character read.
+5.	Display the total character count.
+
+## PROGRAM:
+ ```
+/*
+Program to implement a InnerClass using Java
+Developed by: R.TEJASWINI
+RegisterNumber: 212224230218
+*/
+```
+
+## SOURCE CODE:
+```
+import java.io.*;
+
+public class FileCharacterCount {
+    public static void main(String[] args) {
+        try {
+            // Use BufferedReader to read input
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+            // Read the text to write (assume file name is fixed)
+            String text = br.readLine();
+
+            // Use a fixed file name
+            String fileName = "output.txt";
+
+            // Write text to file
+            try (FileWriter fw = new FileWriter(fileName)) {
+                if (text != null) {
+                    fw.write(text);
+                }
+            }
+
+            // Count characters in file
+            int charCount = 0;
+            try (FileReader fr = new FileReader(fileName)) {
+                while (fr.read() != -1) {
+                    charCount++;
+                }
+            }
+
+            System.out.println("Number of characters written to the file: " + charCount);
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+```
+
+
+
+
+
+
+## OUTPUT:
+<img width="1271" height="303" alt="image" src="https://github.com/user-attachments/assets/8417184e-b934-4c43-a19c-4bc7cec02f4e" />
+
+
+
+## RESULT:
+The program successfully reads the file and prints the total number of characters present in it.
+
+
+
+------
+# Ex.No:5(D) THREAD PRIORITY
+
+## QUESTION:
+Write a java program for set the priority and name of the current thread.Consider two threads t1 and t2
+
+## AIM:
+To write a Java program that demonstrates thread priority by creating two threads, assigning names and priorities to them, and displaying thread execution.
+
+## ALGORITHM :
+1.	Start the program.
+2.	Import the necessary package 'java.util'
+3.	Create a class that extends Thread.
+4. Override the run() method to print the current thread name and priority.
+5. Create two thread objects t1 and t2.
+6. Set names and priorities for each thread using setName() and setPriority().
+7. Start both threads.
+8. Display messages showing thread execution order.
+9. End the program.
+
+
+## PROGRAM:
+ ```
+/*
+Program to implement a Thread Priority Concept using Java
+Developed by: R.TEJASWINI
+RegisterNumber: 212224230218
+*/
+```
+
+## SOURCE CODE:
+```
+import java.util.*;
+
+public class ThreadPriorityExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name1 = sc.nextLine();
+        String name2 = sc.nextLine();
+        Thread t1 = new Thread();
+        Thread t2 = new Thread();
+        t1.setName(name1);
+        t2.setName(name2);
+        t1.setPriority(4);
+        t2.setPriority(2);
+        System.out.println(t1);
+        System.out.println(t2);
+
+        sc.close();
+    }
+}
+```
+
+## OUTPUT:
+
+![java54](https://github.com/ABINAYA-27-76/19AI307_ODD-25-26-/blob/7d952630fc35928069eb8db8971d42aa9400df96/19AI307_JAVA(25-26)/Module-05/DAY-4/java54.png)
+
+
+## RESULT:
+Thus, the Java program that demonstrates thread naming and thread priority was successfully executed.
+------
+# Ex.No:5(E) MULTITHREADING -SYNCHRONIZATION
+
+## QUESTION:
+
+Read N numbers from the user, use a fixed thread pool (size 3) to compute the sum of each number multiplied by 2. Return results in the same order.
+
+## AIM:
+To write a Java program that uses a Fixed Thread Pool to process a set of numbers concurrently and demonstrates synchronization by maintaining the order of results.
+
+## ALGORITHM :
+
+1.	Start the program.
+2.	Import the necessary package 'java.util'
+3.	Read total number of tasks (T) from the user.
+4. Read T numbers and store them in a list.
+5. Create a FixedThreadPool of size 3 using Executors.newFixedThreadPool(3).
+6. Submit tasks to multiply each number by 2 using Callable.
+7. Keep the Future objects returned from each task to retain order.
+8. Retrieve results using future.get() in the same order they were submitted.
+9. Display final results.
+10. Shutdown executor service.
+11. End the program.
+
+
+
+
+
+## PROGRAM:
+ ```
+/*
+Program to implement a Synchronization concept using Java
+Developed by: R.TEJASWINI
+RegisterNumber: 212224230218
+
+*/
+```
+
+## SOURCE CODE:
+```
+import java.util.*;
+import java.util.concurrent.*;
+
+public class FixedThreadPoolExample {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int T = sc.nextInt();
+        List<Integer> numbers = new ArrayList<>();
+        
+        for (int i = 0; i < T; i++) {
+            numbers.add(sc.nextInt());
+        }
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        List<Future<Integer>> results = new ArrayList<>();
+        for (int num : numbers) {
+            Future<Integer> result = executor.submit(() -> num * 2);
+            results.add(result);
+        }
+        for (Future<Integer> res : results) {
+            try {
+                System.out.println("Result: " + res.get());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        executor.shutdown();
+        sc.close();
+    }
+}
+```
+
+## OUTPUT:
+![java55](https://github.com/ABINAYA-27-76/19AI307_ODD-25-26-/blob/c2055b9ef022dad36843a4845adf77e1cc993e4d/19AI307_JAVA(25-26)/Module-05/DAY-5/java55.png)
+
+
+## RESULT:
+Thus, the Java program using multithreading with synchronization and a fixed thread pool to compute values and preserve output order was successfully implemented and executed.
